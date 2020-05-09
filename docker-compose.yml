@@ -1,0 +1,39 @@
+version: '2'
+services:
+  kibana:
+    image: stoleas/kibana:7.6.2
+    network_mode: host
+    links:
+    - elasticsearch:elasticsearch
+    ports:
+    - 5601:5601/tcp
+    labels:
+      io.rancher.container.dns: 'true'
+    tty: true
+    stdin_open: true
+  elasticsearch:
+    image: stoleas/elasticsearch:7.6.2
+    network_mode: host
+    hostname: elasticsearch
+    environment:
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    ports:
+    - 9200:9200/tcp
+    labels:
+      io.rancher.container.dns: 'true'
+    tty: true
+    stdin_open: true
+  logstash:
+    image: stoleas/logstash:7.6.2
+    hostname: logstash
+    network_mode: host
+    links:
+      - elasticsearch:elasticsearch
+    ports:
+      - 5000:5000/tcp
+      - 5000:5000/udp
+    labes:
+      io.rancher.container.dns: 'true'
+    tty: true
+    stdin_open: true
