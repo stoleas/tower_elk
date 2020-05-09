@@ -33,7 +33,7 @@ services:
     ports:
       - 5000:5000/tcp
       - 5000:5000/udp
-    labes:
+    labels:
       io.rancher.container.dns: 'true'
     tty: true
     stdin_open: true
