@@ -12,7 +12,7 @@ services:
     tty: true
     stdin_open: true
   elasticsearch:
-    image: stoleas/elasticsearch:7.6.2
+    image: elasticsearch:7.6.2
     network_mode: host
     hostname: elasticsearch
     environment:
